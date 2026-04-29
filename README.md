@@ -2,7 +2,7 @@
 
 An intelligent course management platform that helps students make sense of their syllabi. Upload a syllabus PDF, and the system automatically extracts key information (deadlines, grading, policies), lets you ask questions in plain English, estimate your grade, and export deadlines to your calendar.
 
-**Live at:** https://syllabushelper.net
+**Live at:** https://syllabushelper.net (backup: http://1.13.152.187:8088/)
 
 ## Features
 
