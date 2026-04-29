@@ -1,0 +1,102 @@
+.dash-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.dash-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e4;
+  flex-shrink: 0;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-logo {
+  width: 28px;
+  height: 28px;
+  background: #2eaadc;
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.topbar-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #37352f;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.topbar-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.topbar-logout {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid #e8e8e4;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #6b6b6b;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.topbar-logout:hover {
+  border-color: #ccc;
+  color: #37352f;
+}
+
+.dash-iframe {
+  flex: 1;
+  border: none;
+  width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dash-topbar {
+    background: #202020;
+    border-color: #333;
+  }
+
+  .topbar-title {
+    color: #e0e0e0;
+  }
+
+  .topbar-user {
+    color: #9b9b9b;
+  }
+
+  .topbar-logout {
+    border-color: #444;
+    color: #9b9b9b;
+  }
+}

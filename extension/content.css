@@ -1,0 +1,145 @@
+/* Floating Action Button */
+#syllabus-helper-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background: #529cca;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  z-index: 999999;
+  transition: transform 0.2s, background 0.2s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+#syllabus-helper-fab:hover {
+  transform: scale(1.1);
+}
+#syllabus-helper-fab.active {
+  background: #3b8dde;
+  transform: rotate(45deg);
+}
+
+/* Drop Zone Overlay */
+#syllabus-helper-dropzone {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  width: 260px;
+  background: #191919;
+  border: 2px dashed #333;
+  border-radius: 12px;
+  z-index: 999998;
+  opacity: 0;
+  transform: translateY(10px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+#syllabus-helper-dropzone.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.sh-dz-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  gap: 6px;
+  transition: background 0.15s;
+  border-radius: 10px;
+}
+.sh-dz-inner.dragover {
+  background: rgba(82,156,202,0.1);
+  border-color: #529cca;
+}
+
+.sh-dz-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(82,156,202,0.15);
+  color: #529cca;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 300;
+}
+.sh-dz-text {
+  color: #e0e0e0;
+  font-size: 13px;
+  font-weight: 500;
+}
+.sh-dz-sub {
+  color: #666;
+  font-size: 11px;
+}
+.sh-dz-browse {
+  margin-top: 8px;
+  background: none;
+  border: 1px solid #333;
+  color: #9b9b9b;
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.sh-dz-browse:hover {
+  border-color: #529cca;
+  color: #529cca;
+}
+
+.sh-dz-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 10px;
+}
+.sh-dz-status.uploading { color: #f2994a; }
+.sh-dz-status.success { color: #27ae60; }
+.sh-dz-status.error { color: #eb5757; }
+
+/* LMS Inline Button */
+.syllabus-helper-btn {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 4px 12px;
+  background: #529cca;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background 0.15s;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.syllabus-helper-btn:hover { background: #3b8dde; }
+.syllabus-helper-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* Light mode */
+@media (prefers-color-scheme: light) {
+  #syllabus-helper-dropzone {
+    background: #ffffff;
+    border-color: #e8e8e4;
+  }
+  .sh-dz-text { color: #37352f; }
+  .sh-dz-sub { color: #9b9a97; }
+  .sh-dz-browse { border-color: #e8e8e4; color: #6b6b6b; }
+  .sh-dz-browse:hover { border-color: #2eaadc; color: #2eaadc; }
+  #syllabus-helper-fab { background: #2eaadc; }
+  #syllabus-helper-fab.active { background: #2898c8; }
+}

@@ -1,0 +1,30 @@
+# dependencies
+frontend/node_modules/
+backend/__pycache__/
+backend/*.pyc
+
+# build output
+frontend/dist/
+
+# data
+backend/data/
+*.db
+
+# env
+.env
+.env.production
+backend/.env
+
+# screenshots & generators
+screenshots/
+take_screenshots.py
+generate_slides.py
+generate_roadmap_pdf.py
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy - Syllabus Helper</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; color: #37352f; line-height: 1.7; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  h2 { font-size: 18px; margin-top: 28px; }
+  .updated { color: #9b9a97; font-size: 14px; margin-bottom: 32px; }
+  ul { padding-left: 20px; }
+</style>
+</head>
+<body>
+<h1>Privacy Policy</h1>
+<p class="updated">Last updated: April 25, 2026</p>
+
+<p>Syllabus Helper ("we", "our", "the Service") is a tool that helps students manage course syllabi. This policy explains how we handle your data.</p>
+
+<h2>Data We Collect</h2>
+<ul>
+  <li><strong>Account information:</strong> Email address and name when you register. Passwords are hashed with bcrypt and never stored in plain text.</li>
+  <li><strong>Syllabus files:</strong> PDF, DOCX, or TXT files you upload. These are processed to extract deadlines, grading, and policies. The raw text is encrypted at rest.</li>
+  <li><strong>Authentication tokens:</strong> Stored locally in your browser to keep you signed in.</li>
+</ul>
+
+<h2>How We Use Your Data</h2>
+<ul>
+  <li>To provide the Service: parsing syllabi, displaying deadlines, answering questions about your courses.</li>
+  <li>We do not sell, share, or transfer your data to third parties.</li>
+  <li>We do not use your data for advertising.</li>
+</ul>
+
+<h2>Data Storage and Security</h2>
+<ul>
+  <li>All data is stored on our server and isolated per user — you can only access your own data.</li>
+  <li>Syllabus text is encrypted using AES-128 (Fernet) encryption at rest.</li>
+  <li>Communication is encrypted via HTTPS (TLS).</li>
+  <li>Passwords are hashed with bcrypt.</li>
+</ul>
+
+<h2>Chrome Extension</h2>
+<p>The Syllabus Helper Chrome extension:</p>
+<ul>
+  <li>Stores your authentication token in Chrome's local storage to keep you signed in.</li>
+  <li>Communicates only with syllabushelper.net — no data is sent to any other server.</li>
+  <li>Does not track your browsing activity.</li>
+  <li>Does not execute any remote code.</li>
+</ul>
+
+<h2>Data Deletion</h2>
+<p>You can delete your uploaded syllabi at any time from the Dashboard. To delete your account entirely, contact us at the email below.</p>
+
+<h2>Contact</h2>
+<p>If you have questions about this privacy policy, contact us at: <a href="mailto:hjisun@usc.edu">hjisun@usc.edu</a></p>
+</body>
+</html>
