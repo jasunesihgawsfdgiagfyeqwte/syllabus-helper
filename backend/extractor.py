@@ -541,7 +541,8 @@ def extract_grading(text: str) -> list[dict]:
     search_text = table_match.group(1) if table_match else text
 
     # Only match lines WITHOUT colons (to avoid capturing "Component: XX%" as table)
-    pattern = r"^[\s]*([A-Z][A-Za-z\s/&]+?)\s{2,}(\d{1,3})\s*(?:\(\+\d+[^)]*\))?\s*%?\s*$"
+    # Use [ \t] instead of \s to prevent matching across newlines
+    pattern = r"^[ \t]*([A-Z][A-Za-z /&\-]+?)[ \t]{2,}(\d{1,3})\s*(?:\(\+\d+[^)]*\))?\s*%?\s*$"
     for m in re.finditer(pattern, search_text, re.MULTILINE):
         line = m.group(0)
         if ":" in line:
@@ -592,9 +593,58 @@ def extract_grading(text: str) -> list[dict]:
                             "total_points": total_pts,
                         })
 
-    # Filter noise
-    noise_words = ["total", "week", "topic", "study day"]
-    grading = [g for g in grading if not any(nw in g["component"].lower() for nw in noise_words)]
+    # Filter noise: generic single words and non-grading terms
+    noise_words = ["total", "week", "topic", "study day", "grade", "grading",
+                   "description", "assessment", "weight", "points", "percent"]
+    # Single-word terms that are never standalone grading components
+    # (e.g. "Code 5%", "Effort 7%", "Video 10%" from rubric descriptions)
+    single_word_noise = {"code", "effort", "video", "audio", "style", "design",
+                         "format", "content", "quality", "clarity", "writing",
+                         "grammar", "length", "depth", "scope", "creativity",
+                         "teamwork", "communication", "professionalism",
+                         "completion", "accuracy", "organization", "analysis",
+                         "research", "reading", "readings", "lecture", "lectures",
+                         "discussion", "discussions", "review", "notes", "rubric",
+                         "criteria", "category", "item", "task", "activity",
+                         "requirement", "deliverable", "component", "section"}
+
+    filtered = []
+    for g in grading:
+        comp = g["component"].strip()
+        comp_lower = comp.lower()
+
+        # Skip noise words
+        if any(nw in comp_lower for nw in noise_words):
+            continue
+        # Skip single-word generic terms (rubric descriptors, not grading categories)
+        if comp_lower in single_word_noise:
+            continue
+        # Skip components that are only 1-2 chars (e.g. just a letter)
+        if len(comp) < 3:
+            continue
+
+        filtered.append(g)
+    grading = filtered
+
+    # Deduplicate: if "Exam 1" exists alongside "Midterm Exam", drop the shorter name
+    # when both have different weights (indicates double-counting)
+    if len(grading) > 1:
+        total = sum(g["weight"] for g in grading)
+        if total > 120:
+            # Likely has duplicates; prefer longer/more descriptive component names
+            to_remove = set()
+            for i, a in enumerate(grading):
+                for j, b in enumerate(grading):
+                    if i >= j:
+                        continue
+                    a_words = set(a["component"].lower().split())
+                    b_words = set(b["component"].lower().split())
+                    # If one is a subset of the other (e.g. "Exam" in "Midterm Exam")
+                    if a_words & b_words and len(a_words) < len(b_words):
+                        to_remove.add(i)
+                    elif a_words & b_words and len(b_words) < len(a_words):
+                        to_remove.add(j)
+            grading = [g for i, g in enumerate(grading) if i not in to_remove]
 
     # Validate: if weights sum to way over 100, keep only large items
     total = sum(g["weight"] for g in grading)
